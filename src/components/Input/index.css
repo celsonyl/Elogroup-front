@@ -1,0 +1,32 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5px;
+}
+
+.label {
+  padding: 2px;
+  font-size: 14px;
+}
+
+.required::after {
+  font-size: 12px;
+  content: "*";
+  color: black;
+}
+
+.input {
+  border-radius: 0;
+  border: 1.5px solid black;
+  height: 24px;
+  width: 100%;
+  margin: 0;
+}
+
+.error {
+  color: red;
+}
+
+span.error {
+  font-size: small;
+}

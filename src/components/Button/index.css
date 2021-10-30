@@ -1,0 +1,18 @@
+.btn {
+  border: 2px solid black;
+  height: 40px;
+  color: black;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background: none;
+  cursor: pointer;
+}
+
+.btn.blueBtn {
+  background-color: deepskyblue;
+  color: white;
+  border: none;
+}
