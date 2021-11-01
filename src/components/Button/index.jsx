@@ -1,3 +1,4 @@
+import React from 'react'
 import "./index.css";
 
 function Button({ text, onClick, type, formButton }) {

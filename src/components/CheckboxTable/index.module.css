@@ -1,0 +1,32 @@
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+
+.thead {
+  background-color: gray;
+  width: calc(100% / 3);
+}
+
+.tr:nth-child(even) {
+  background-color: white;
+}
+
+.tr:nth-child(odd) {
+  background-color: silver;
+}
+
+.cell {
+  height: 48px;
+  border: 1px solid black;
+}
+
+.th {
+  color: white;
+}
+
+.tr {
+  color: black;
+  text-align: center;
+}

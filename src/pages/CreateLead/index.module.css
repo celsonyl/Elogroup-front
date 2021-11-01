@@ -1,0 +1,21 @@
+.container {
+  padding: 24px 48px;
+}
+
+.main {
+  display: flex;
+  gap: calc(100% / 3);
+}
+
+.column {
+  width: calc(100% / 3);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

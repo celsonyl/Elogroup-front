@@ -1,0 +1,8 @@
+.btnBox {
+  width: calc(100% / 3);
+  margin-bottom: 16px;
+}
+
+.container {
+  padding: 24px 48px;
+}

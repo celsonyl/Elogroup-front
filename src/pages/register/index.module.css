@@ -1,0 +1,26 @@
+.box {
+  width: 20%;
+  border: 2px solid black;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.msgError {
+  color: red;
+  font-size: small;
+  display: flex;
+  align-self: center;
+  margin-top: 8px;
+}

@@ -1,21 +1,30 @@
+import React from "react";
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Home from "./pages/home";
-import Register from "./pages/register";
-import './App.css'
+import Register from "./pages/Register";
+import "./App.css";
+import { LeadPanel } from "./pages/LeadPanel";
+import { CreateLead } from "./pages/CreateLead";
 
 function App() {
-	return (
-		<Router>
-			<Switch>
-				<Route path="/register">
-					<Register />
-				</Route>
-				<Route path="/">
-					<Home />
-				</Route>
-			</Switch>
-		</Router>
-	);
+  return (
+    <Router>
+      <Switch>
+        <Route path="/lead-panel">
+          <LeadPanel />
+        </Route>
+        <Route path="/create-lead">
+          <CreateLead />
+        </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
+        <Route path="/">
+          <Register />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;

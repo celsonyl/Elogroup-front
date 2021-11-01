@@ -1,10 +1,15 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import TextBox from "../../components/Input";
 import Button from "../../components/Button";
 import { register } from "../../service/register";
-import "./index.css";
+import styles from "./index.module.css";
+import { Logo } from "../../components/Logo";
+import { useHistory } from "react-router";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 function Register() {
+  const history = useHistory();
+  const [users, setUsers] = useLocalStorage("users", []);
   const usernameRef = useRef("");
   const passwordRef = useRef("");
   const confirmPasswordRef = useRef("");
@@ -14,19 +19,22 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    const username = usernameRef.current.value;
+    const password = passwordRef.current.value;
     if (!errorPassword && !errorConfirmPassword) {
       register({
-        username: usernameRef.current.value,
-        password: passwordRef.current.value,
+        username,
+        password,
       })
-        .then((r) => { })
-        .catch((c) => {
-          if (c.response.status === 422) {
+        .then(() => {
+          setUsers([...users, username]);
+          history.push("/lead-panel");
+        })
+        .catch((e) => {
+          if (e.response?.status === 422) {
             setErrorOnRegister("Usuário já existe");
             return;
           }
-          setErrorOnRegister("Erro ao cadastrar");
         });
     }
   };
@@ -46,13 +54,10 @@ function Register() {
   };
 
   return (
-    <main className="main">
-      <div className="bodyForm">
-        <h3 className="title">
-          <span>ELO</span>
-          <span className="bolder">GROUP</span>
-        </h3>
-        <form className="form" onSubmit={(e) => handleSubmit(e)}>
+    <main className={styles.main}>
+      <div className={styles.box}>
+        <Logo />
+        <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
           <TextBox
             ref={usernameRef}
             inputName="Usuário"
@@ -82,7 +87,9 @@ function Register() {
           />
           <Button type="submit" text="Registrar" formButton />
         </form>
-        {errorOnRegister && <span className="msgError">{errorOnRegister}</span>}
+        {errorOnRegister && (
+          <span className={styles.msgErro}>{errorOnRegister}</span>
+        )}
       </div>
     </main>
   );
