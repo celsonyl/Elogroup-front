@@ -29,7 +29,7 @@ export function LeadPanel() {
             { Header: "Dados Confirmados", accessor: "col2" },
             { Header: "Reunião Agendada", accessor: "col3" },
           ]}
-          data={leads.map((l) => l.table) || [{ col2: "tres" }]}
+          data={leads?.map((l) => l.table) || []}
         />
       </main>
     </div>
