@@ -28,5 +28,6 @@
 
 .tr {
   color: black;
+  border: 1px solid black;
   text-align: center;
 }

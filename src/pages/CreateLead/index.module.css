@@ -19,3 +19,7 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.msgSuccess {
+  color: green;
+}

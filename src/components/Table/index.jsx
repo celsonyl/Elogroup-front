@@ -2,7 +2,7 @@ import React from "react";
 import { useTable } from "react-table";
 import styles from "./index.module.css";
 
-export function Table({ columns, data }) {
+export function Table({ columns, data, moveToNextCol }) {
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({
       columns,
@@ -34,6 +34,9 @@ export function Table({ columns, data }) {
                   <td
                     {...cell.getCellProps()}
                     className={`${styles.cell} ${styles.td}`}
+                    onDragEnd={() => {
+                      moveToNextCol(cell.value, cell.column.id);
+                    }}
                   >
                     {cell.render("Cell")}
                   </td>

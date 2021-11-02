@@ -8,7 +8,26 @@ import styles from "./index.module.css";
 
 export function LeadPanel() {
   const history = useHistory();
-  const [leads] = useLocalStorage("leads");
+  const [leads, setLeads] = useLocalStorage("leads", []);
+  const moveToNextCol = (value, col) => {
+    const row = leads.find((l) => l.name === value);
+    const index = leads.indexOf((l) => l.name === value);
+    if (row) {
+      switch (col) {
+        case "col1":
+          row.table = { col2: value };
+          break;
+        case "col2":
+        default:
+          row.table = { col3: value };
+          break;
+      }
+
+      const newLeads = leads;
+      newLeads[index] = row;
+      setLeads([...newLeads]);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -30,6 +49,7 @@ export function LeadPanel() {
             { Header: "Reunião Agendada", accessor: "col3" },
           ]}
           data={leads?.map((l) => l.table) || []}
+          moveToNextCol={moveToNextCol}
         />
       </main>
     </div>

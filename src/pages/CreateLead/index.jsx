@@ -1,16 +1,18 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Header } from "../../components/Header";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import TextBox from "../../components/Input";
 import styles from "./index.module.css";
 import Button from "../../components/Button";
 import { CheckboxTable } from "../../components/CheckboxTable";
+import { createLead } from "../../service/createLead";
 
 export function CreateLead() {
   const nameRef = useRef("");
   const phoneRef = useRef("");
   const emailRef = useRef("");
   const [leads, setLeads] = useLocalStorage("leads", []);
+  const showSuccess = useRef(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,8 +24,23 @@ export function CreateLead() {
       table: { col1: nameRef.current.value },
     };
 
-    setLeads([...leads, data]);
+    createLead({
+      email: data.email,
+      name: data.name,
+      phone: data.phone,
+    }).finally(() => {
+      setLeads([...leads, data]);
+    });
+    showSuccess.current = true;
   };
+
+  useEffect(() => {
+    if (showSuccess.current) {
+      setTimeout(() => {
+        showSuccess.current = false;
+      }, 2000);
+    }
+  });
 
   return (
     <div className={styles.container}>
@@ -54,35 +71,14 @@ export function CreateLead() {
             />
           </div>
           <div className={styles.column}>
-            {/* <Table
-              columns={[
-                { Header: "", accessor: "col1" },
-                { Header: "", accessor: "col2" },
-              ]}
-              data={[
-                {
-                  col1: "checkbox",
-                  col2: "RPA",
-                },
-                {
-                  col1: "checkbox",
-                  col2: "Produto Digital",
-                },
-                {
-                  col1: "checkbox",
-                  col2: "Analytics",
-                },
-                {
-                  col1: "checkbox",
-                  col2: "BPM",
-                },
-              ]}
-            /> */}
             <CheckboxTable />
             <Button text="Salvar" type="submit" />
           </div>
         </main>
       </form>
+      {showSuccess.current && (
+        <span className={styles.msgSuccess}>Lead incluída com sucesso </span>
+      )}
     </div>
   );
 }
